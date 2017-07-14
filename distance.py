@@ -1,41 +1,104 @@
 import RPi.GPIO as GPIO
 import time
 
-while True:
+
 	GPIO.setmode(GPIO.BCM)
 	
 	TRIG=6
 	ECHO=23
+    LK=True
 	
 	print "Distance Measurement In Progress"
+while True:
+    
+    GPIO.setup(TRIG,GPIO.OUT)
+    GPIO.setup(ECHO,GPIO.IN)
 	
-	GPIO.setup(TRIG,GPIO.OUT)
-	GPIO.setup(ECHO,GPIO.IN)
+    GPIO.output(TRIG,GPIO.IN)
 	
-	GPIO.output(TRIG,GPIO.IN)
+    GPIO.output(TRIG, False)
 	
-	GPIO.output(TRIG, False)
+    GPIO.output(TRIG, True)
 	
-	GPIO.output(TRIG, True)
+    GPIO.output(TRIG, True)
+    time.sleep(0.00001)
+    GPIO.output(TRIG, False)
 	
-	GPIO.output(TRIG, True)
-	time.sleep(0.00001)
-	GPIO.output(TRIG, False)
+    while GPIO.input(ECHO)==0:
+        pulse_start = time.time()
 	
-	while GPIO.input(ECHO)==0:
-	 pulse_start = time.time()
+    while GPIO.input(ECHO)==1:
+        pulse_end = time.time()
 	
-	while GPIO.input(ECHO)==1:
-	 pulse_end = time.time()
+    pulse_duration = pulse_end - pulse_start
 	
-	pulse_duration = pulse_end - pulse_start
+    distance = pulse_duration * 17150
 	
-	distance = pulse_duration * 17150
+    distance = round(distance, 2)
 	
-	distance = round(distance, 2)
+    print "Distance:", distance, "cm"
 	
-	print "Distance:", distance, "cm"
-	
-	GPIO.cleanup()
-	if distance > 1000:
-		break
+    GPIO.cleanup()
+    if LK:
+        if distance > 1000:
+            time.sleep(15)
+            GPIO.setup(TRIG,GPIO.OUT)
+            GPIO.setup(ECHO,GPIO.IN)
+    
+            GPIO.output(TRIG,GPIO.IN)
+    
+            GPIO.output(TRIG, False)
+    
+            GPIO.output(TRIG, True)
+    
+            GPIO.output(TRIG, True)
+            time.sleep(0.00001)
+            GPIO.output(TRIG, False)
+    
+            while GPIO.input(ECHO)==0:
+                pulse_start = time.time()
+    
+            while GPIO.input(ECHO)==1:
+                pulse_end = time.time()
+
+            pulse_duration = pulse_end - pulse_start
+
+            distance = pulse_duration * 17150
+    
+            distance = round(distance, 2)
+    
+            print "Distance:", distance, "cm"
+            if distance > 1000:
+                send()
+                LK = False
+    else:
+        if distance < 1000:
+            time.sleep(15)
+            GPIO.setup(ECHO,GPIO.IN)
+            
+            GPIO.output(TRIG,GPIO.IN)
+            
+            GPIO.output(TRIG, False)
+            
+            GPIO.output(TRIG, True)
+            
+            GPIO.output(TRIG, True)
+            time.sleep(0.00001)
+            GPIO.output(TRIG, False)
+            
+            while GPIO.input(ECHO)==0:
+                pulse_start = time.time()
+            
+            while GPIO.input(ECHO)==1:
+                pulse_end = time.time()
+        
+            pulse_duration = pulse_end - pulse_start
+            
+            distance = pulse_duration * 17150
+            
+            distance = round(distance, 2)
+            
+            print "Distance:", distance, "cm"
+            if distance < 1000:
+                send()
+                LK = False
