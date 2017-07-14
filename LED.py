@@ -22,3 +22,4 @@ while True:
     GPIO.output(11,GPIO.LOW)
     GPIO.output(13,GPIO.LOW)
     GPIO.output(29,GPIO.LOW)
+    time.sleep(1)
