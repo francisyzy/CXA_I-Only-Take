@@ -54,6 +54,13 @@ while True:
     if LK:
         if distance > 1000:
             time.sleep(5)
+            GPIO.setmode(GPIO.BCM)
+
+            TRIG=6
+            ECHO=23
+    
+    
+            print "Distance Measurement In Progress"
             GPIO.setup(TRIG,GPIO.OUT)
             GPIO.setup(ECHO,GPIO.IN)
     
@@ -86,6 +93,13 @@ while True:
     else:
         if distance < 1000:
             time.sleep(5)
+            GPIO.setmode(GPIO.BCM)
+            
+            TRIG=6
+            ECHO=23
+            
+            
+            print "Distance Measurement In Progress"
             GPIO.setup(ECHO,GPIO.IN)
             
             GPIO.output(TRIG,GPIO.IN)
