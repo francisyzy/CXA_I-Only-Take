@@ -1,15 +1,27 @@
 import RPi.GPIO as GPIO
 import time
+import pyrebase
 
+config = {
+    "apiKey": "AIzaSyD6cr3TxbHq8WPPVc9vaHfwjp--6FlRIdA",
+    "authDomain": "cxapi-c8d4d.firebaseapp.com",
+    "databaseURL": "https://cxapi-c8d4d.firebaseio.com/",
+    "storageBucket": "cxapi-c8d4d.appspot.com"
+}
 
-	GPIO.setmode(GPIO.BCM)
-	
-	TRIG=6
-	ECHO=23
-    LK=True
-	
-	print "Distance Measurement In Progress"
+firebase = pyrebase.initialize_app(config)
+
+db = firebase.database()
+LK=True
+
 while True:
+    GPIO.setmode(GPIO.BCM)
+        
+    TRIG=6
+    ECHO=23
+    
+        
+    print "Distance Measurement In Progress"
     
     GPIO.setup(TRIG,GPIO.OUT)
     GPIO.setup(ECHO,GPIO.IN)
@@ -41,7 +53,7 @@ while True:
     GPIO.cleanup()
     if LK:
         if distance > 1000:
-            time.sleep(15)
+            time.sleep(5)
             GPIO.setup(TRIG,GPIO.OUT)
             GPIO.setup(ECHO,GPIO.IN)
     
@@ -69,11 +81,11 @@ while True:
     
             print "Distance:", distance, "cm"
             if distance > 1000:
-                send()
+                db.child("Pi1").child("Pi1").update({"inUse": "false"})
                 LK = False
     else:
         if distance < 1000:
-            time.sleep(15)
+            time.sleep(5)
             GPIO.setup(ECHO,GPIO.IN)
             
             GPIO.output(TRIG,GPIO.IN)
@@ -100,5 +112,5 @@ while True:
             
             print "Distance:", distance, "cm"
             if distance < 1000:
-                send()
+                db.child("Pi1").child("Pi1").update({"inUse": "true"})
                 LK = False
