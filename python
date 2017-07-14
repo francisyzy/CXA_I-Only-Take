@@ -64,7 +64,7 @@ while True:
             print "Distance Measurement In Progress"
             GPIO.setup(TRIG,GPIO.OUT)
             GPIO.setup(ECHO,GPIO.IN)
-
+    
             GPIO.output(TRIG,GPIO.IN)
     
             GPIO.output(TRIG, False)
@@ -98,10 +98,10 @@ while True:
             time.sleep(5)
             GPIO.setmode(GPIO.BCM)
             
-            print "Distance Measurement In Progress"
-            GPIO.setup(TRIG,GPIO.OUT)
-            GPIO.setup(ECHO,GPIO.IN)
 
+            
+            
+            print "Distance Measurement In Progress"
             GPIO.setup(ECHO,GPIO.IN)
             
             GPIO.output(TRIG,GPIO.IN)
@@ -130,4 +130,4 @@ while True:
             if distance < 10:
 		print "Sending to database"
                 db.child("Pi1").child("Pi1").update({"inUse": "true"})
-                LK = True
+                LK = False
