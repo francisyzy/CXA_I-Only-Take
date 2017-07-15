@@ -41,5 +41,5 @@ while True:
         LEDon
     else:
         LEDoff
-    sleep(10)
-    print "One loop done"
+    time.sleep(10)
+    print "One loop done resting 10s"
