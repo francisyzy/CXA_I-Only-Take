@@ -53,5 +53,5 @@ while True:
         GPIO.output(29,GPIO.LOW)
         time.sleep(1)
         print "LightOff"
-    time.sleep(10)
-    print "One loop done resting 10s"
+    time.sleep(3)
+    print "One loop done resting 3s"
