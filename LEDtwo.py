@@ -37,7 +37,7 @@ while True:
     result = firebase.get('/Pi1/Pi1/inBook', None)
     print result
     
-    if result:
+    if result == "true":
         GPIO.output(19,GPIO.HIGH)
         GPIO.output(7,GPIO.HIGH)
         GPIO.output(11,GPIO.HIGH)
