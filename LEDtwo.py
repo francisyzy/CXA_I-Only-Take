@@ -35,5 +35,5 @@ while True:
 
     if result:
         LEDon
-    else
+    else:
         LEDoff
