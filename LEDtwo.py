@@ -16,7 +16,7 @@ def LEDon():
     GPIO.output(13,GPIO.HIGH)
     GPIO.output(29,GPIO.HIGH)
     time.sleep(1)
-    return;
+    #return;
 
 def LEDoff():
     GPIO.output(19,GPIO.LOW)
@@ -25,7 +25,7 @@ def LEDoff():
     GPIO.output(13,GPIO.LOW)
     GPIO.output(29,GPIO.LOW)
     time.sleep(1)
-    return;
+    #return;
 
 LEDoff
 LEDon
