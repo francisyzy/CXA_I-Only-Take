@@ -38,8 +38,18 @@ while True:
     print result
     
     if result:
-        LEDon
+        GPIO.output(19,GPIO.HIGH)
+        GPIO.output(7,GPIO.HIGH)
+        GPIO.output(11,GPIO.HIGH)
+        GPIO.output(13,GPIO.HIGH)
+        GPIO.output(29,GPIO.HIGH)
+        time.sleep(1)
     else:
-        LEDoff
+        GPIO.output(19,GPIO.LOW)
+        GPIO.output(7,GPIO.LOW)
+        GPIO.output(11,GPIO.LOW)
+        GPIO.output(13,GPIO.LOW)
+        GPIO.output(29,GPIO.LOW)
+        time.sleep(1)
     time.sleep(10)
     print "One loop done resting 10s"
