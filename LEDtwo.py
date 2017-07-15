@@ -33,7 +33,7 @@ while True:
         time.sleep(1)
         return;
 
-    if(result)
+    if result:
         LEDon
     else
         LEDoff
