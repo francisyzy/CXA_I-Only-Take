@@ -44,6 +44,7 @@ while True:
         GPIO.output(13,GPIO.HIGH)
         GPIO.output(29,GPIO.HIGH)
         time.sleep(1)
+        print "LightON"
     else:
         GPIO.output(19,GPIO.LOW)
         GPIO.output(7,GPIO.LOW)
@@ -51,5 +52,6 @@ while True:
         GPIO.output(13,GPIO.LOW)
         GPIO.output(29,GPIO.LOW)
         time.sleep(1)
+        print "LightOff"
     time.sleep(10)
     print "One loop done resting 10s"
